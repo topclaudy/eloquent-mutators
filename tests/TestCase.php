@@ -32,8 +32,15 @@ abstract class TestCase extends BaseTestCase
         $this->app['config']->set('database.default','sqlite');
         $this->app['config']->set('database.connections.sqlite.database', ':memory:');
 
-        Mutator::getter('trim', function($model, $value, $key){
+        $this->app['config']->set('mutators.getters_property','getters');
+        $this->app['config']->set('mutators.setters_property','setters');
+
+        Mutator::getter('trim_space', function($model, $value, $key){
             return trim($value);
+        });
+
+        Mutator::getter('remove_extra_space', function($model, $value, $key){
+            return preg_replace('/\s+/', ' ', $value);
         });
 
         Mutator::getter('nice', function($model, $value, $key){

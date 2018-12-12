@@ -17,7 +17,7 @@ class MutatorTest extends TestCase
         Model::unguard();
 
         $post = new Post();
-        $post->title = 'Mutators are awesome   ';
+        $post->title = 'Mutators      are     awesome   ';
         $post->save();
 
         $this->assertEquals($post->title, '*Mutators are nice');

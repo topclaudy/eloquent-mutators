@@ -17,5 +17,9 @@ class MutatorServiceProvider extends ServiceProvider
         Mutator::getter('trim_space', function($model, $value, $key){
             return trim($value);
         });
+
+        Mutator::getter('remove_extra_space', function($model, $value, $key){
+            return preg_replace('/\s+/', ' ', $value);
+        });
     }
 }
