@@ -15,7 +15,7 @@ trait HasAttributes
     public function getAttributeValue($key)
     {
         // If the attribute has custom getters, we will call them
-        if(property_exists($this, 'getters') && isset($this->getters[$key])) {
+        if(property_exists($this, config('mutators.getters_property')) && isset($this->getters[$key])) {
             $value = $this->getAttributeFromArray($key);
 
             $getters = array_wrap($this->getters[$key]);
@@ -39,7 +39,7 @@ trait HasAttributes
     public function setAttribute($key, $value)
     {
         // If the attribute has custom setters, we will call them
-        if(property_exists($this, 'setters') && isset($this->setters[$key])) {
+        if(property_exists($this, config('mutators.setters_property')) && isset($this->setters[$key])) {
             $setters = array_wrap($this->setters[$key]);
             foreach($setters as $setter){
                 $this->attributes[$key] = Mutator::setter($setter)($this, $value, $key);
