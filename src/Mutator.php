@@ -3,6 +3,7 @@
 namespace Awobaz\Mutator;
 
 use Awobaz\Mutator\Database\Eloquent\Concerns\HasAttributes;
+use Awobaz\Mutator\Exceptions\UnregisteredMutatorException;
 use Closure;
 
 trait Mutator
@@ -26,7 +27,10 @@ trait Mutator
     public static function getter($name, Closure $getter = null)
     {
         if(is_null($getter)){
-            //TODO: check definition and throw exception
+            if(!isset(static::$registeredGetters[$name])){
+                throw new UnregisteredMutatorException("The getter '{$name}' is not registered");
+            }
+
             return static::$registeredGetters[$name];
         }
 
@@ -36,7 +40,10 @@ trait Mutator
     public static function setter($name, Closure $setter = null)
     {
         if(is_null($setter)){
-            //TODO: check definition and throw exception
+            if(!isset(static::$registeredSetters[$name])){
+                throw new UnregisteredMutatorException("The setter '{$name}' is not registered");
+            }
+
             return static::$registeredSetters[$name];
         }
 
