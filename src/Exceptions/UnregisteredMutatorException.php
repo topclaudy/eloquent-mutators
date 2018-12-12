@@ -1,6 +1,6 @@
 <?php
 
-namespace Awobaz\Compoships\Exceptions;
+namespace Awobaz\Mutator\Exceptions;
 
 use Exception;
 
