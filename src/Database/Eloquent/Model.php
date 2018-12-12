@@ -2,10 +2,10 @@
 
 namespace Awobaz\Mutator\Database\Eloquent;
 
-use Awobaz\Mutator\Mutator;
+use Awobaz\Mutator\Mutable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Model extends Eloquent
 {
-    use Mutator;
+    use Mutable;
 }

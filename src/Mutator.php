@@ -6,47 +6,28 @@ use Awobaz\Mutator\Database\Eloquent\Concerns\HasAttributes;
 use Awobaz\Mutator\Exceptions\UnregisteredMutatorException;
 use Closure;
 
-trait Mutator
+class Mutator
 {
-    use HasAttributes;
-
     /**
-     * The registered getters.
+     * The registered mutators.
      *
      * @var array
      */
-    protected static $registeredGetters = [];
+    protected static $registeredMutators = [];
 
-    /**
-     * The registered setters.
-     *
-     * @var array
-     */
-    protected static $registeredSetters = [];
-
-    public static function getter($name, Closure $getter = null)
+    public static function add($name, Closure $getter)
     {
-        if(is_null($getter)){
-            if(!isset(static::$registeredGetters[$name])){
-                throw new UnregisteredMutatorException("The getter '{$name}' is not registered");
-            }
+        static::$registeredMutators[$name] = $getter;
 
-            return static::$registeredGetters[$name];
-        }
-
-        static::$registeredGetters[$name] = $getter;
+        return new static;
     }
 
-    public static function setter($name, Closure $setter = null)
+    public static function get($name)
     {
-        if(is_null($setter)){
-            if(!isset(static::$registeredSetters[$name])){
-                throw new UnregisteredMutatorException("The setter '{$name}' is not registered");
-            }
-
-            return static::$registeredSetters[$name];
+        if(!isset(static::$registeredMutators[$name])){
+            throw new UnregisteredMutatorException("The mutator '{$name}' is not registered");
         }
 
-        static::$registeredSetters[$name] = $setter;
+        return static::$registeredMutators[$name];
     }
 }

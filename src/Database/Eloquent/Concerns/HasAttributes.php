@@ -20,7 +20,7 @@ trait HasAttributes
 
             $getters = array_wrap($this->getters[$key]);
             foreach($getters as $getter){
-                $value = Mutator::getter($getter)($this, $value, $key);
+                $value = Mutator::get($getter)($this, $value, $key);
             }
 
             return $value;
@@ -42,7 +42,7 @@ trait HasAttributes
         if(property_exists($this, config('mutators.setters_property')) && isset($this->setters[$key])) {
             $setters = array_wrap($this->setters[$key]);
             foreach($setters as $setter){
-                $this->attributes[$key] = Mutator::setter($setter)($this, $value, $key);
+                $this->attributes[$key] = Mutator::get($setter)($this, $value, $key);
             }
 
             return $this->attributes[$key];

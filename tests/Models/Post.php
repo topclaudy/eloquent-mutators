@@ -7,7 +7,7 @@ use Awobaz\Mutator\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $getters = [
-        'title' => ['trim_space', 'nice'],
+        'title' => ['trim_space', 'remove_extra_space', 'nice'],
     ];
 
     protected $setters = [
