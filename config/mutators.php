@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'getters_property' => 'getters',
+    'accessors_property' => 'accessors',
 
     /*
     |--------------------------------------------------------------------------
@@ -23,5 +23,5 @@ return [
     |
     */
 
-    'setters_property' => 'setters',
+    'mutators_property' => 'mutators',
 ];

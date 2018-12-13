@@ -14,13 +14,14 @@ trait HasAttributes
      */
     public function getAttributeValue($key)
     {
-        // If the attribute has custom getters, we will call them
-        if(property_exists($this, config('mutators.getters_property')) && isset($this->getters[$key])) {
+        // If the attribute has custom accessors, we will call them
+        if(property_exists($this, config('mutators.accessors_property')) && isset($this->{config('mutators.accessors_property')}[$key])) {
             $value = $this->getAttributeFromArray($key);
 
-            $getters = array_wrap($this->getters[$key]);
-            foreach($getters as $getter){
-                $value = Mutator::get($getter)($this, $value, $key);
+            $accessors = array_wrap($this->{config('mutators.accessors_property')}[$key]);
+
+            foreach($accessors as $accessor){
+                $value = Mutator::get($accessor)($this, $value, $key);
             }
 
             return $value;
@@ -38,11 +39,13 @@ trait HasAttributes
      */
     public function setAttribute($key, $value)
     {
-        // If the attribute has custom setters, we will call them
-        if(property_exists($this, config('mutators.setters_property')) && isset($this->setters[$key])) {
-            $setters = array_wrap($this->setters[$key]);
-            foreach($setters as $setter){
-                $this->attributes[$key] = Mutator::get($setter)($this, $value, $key);
+        // If the attribute has custom mutators, we will call them
+        if(property_exists($this, config('mutators.mutators_property')) && isset($this->{config('mutators.mutators_property')}[$key])) {
+
+            $mutators = array_wrap($this->{config('mutators.mutators_property')}[$key]);
+
+            foreach($mutators as $mutator){
+                $this->attributes[$key] = Mutator::get($mutator)($this, $value, $key);
             }
 
             return $this->attributes[$key];

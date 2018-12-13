@@ -6,11 +6,11 @@ use Awobaz\Mutator\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $getters = [
-        'title' => ['trim_space', 'remove_extra_space', 'nice'],
+    protected $accessors = [
+        'title' => ['trim_whitespace', 'remove_extra_whitespace', 'nice'],
     ];
 
-    protected $setters = [
+    protected $mutators = [
         'title' => ['prepend_star']
     ];
 }

@@ -47,7 +47,7 @@ class MutatorServiceProvider extends ServiceProvider {
 
         $this->registerCommands();
 
-        $this->registerDefaultMutators();
+        $this->registerDefaultExtensions();
 
         $this->mergeConfig();
     }
@@ -86,12 +86,34 @@ class MutatorServiceProvider extends ServiceProvider {
         );
     }
 
-    private function registerDefaultMutators(){
-        MutatorFacade::extend('trim_space', function($model, $value, $key){
-            return trim($value);
-        });
+    private function registerDefaultExtensions(){
+        $extensions = [
+            //PHP functions
+            'strtolower'   => 'lower_case',
+            'strtoupper'   => 'upper_case',
+            'ucfirst'      => 'capitalize',
+            'ucwords'      => 'capitalize_all',
+            'trim'         => 'trim_whitespace',
+            //Framework functions
+            'camel_case'   => 'camel_case',
+            'snake_case'   => 'snake_case',
+            'kebab_case'   => 'kebab_case',
+            'studly_case'  => 'studly_case',
+            'title_case'   => 'title_case',
+            'str_plural'   => 'plural',
+            'str_singular' => 'singular',
+            'str_slug'     => 'slug',
+        ];
 
-        MutatorFacade::extend('remove_extra_space', function($model, $value, $key){
+        foreach($extensions as $function => $extension){
+            if(function_exists($function)) {
+                MutatorFacade::extend($extension, function ($model, $value, $key) use ($function) {
+                    return $function($value);
+                });
+            }
+        }
+
+        MutatorFacade::extend('remove_extra_whitespace', function($model, $value, $key){
             return preg_replace('/\s+/', ' ', $value);
         });
     }

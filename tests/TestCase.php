@@ -33,8 +33,8 @@ abstract class TestCase extends BaseTestCase
         $this->app['config']->set('database.default','sqlite');
         $this->app['config']->set('database.connections.sqlite.database', ':memory:');
 
-        $this->app['config']->set('mutators.getters_property','getters');
-        $this->app['config']->set('mutators.setters_property','setters');
+        $this->app['config']->set('mutators.accessors_property','accessors');
+        $this->app['config']->set('mutators.mutators_property','mutators');
 
         $this->app->singleton('mutator', function ($app) {
             return new Mutator();
@@ -42,9 +42,9 @@ abstract class TestCase extends BaseTestCase
 
         $this->app->alias('mutator', 'Awobaz\Mutator\Mutator');
 
-        MutatorFacade::extend('trim_space', function($model, $value, $key){
+        MutatorFacade::extend('trim_whitespace', function($model, $value, $key){
             return trim($value);
-        })->extend('remove_extra_space', function($model, $value, $key){
+        })->extend('remove_extra_whitespace', function($model, $value, $key){
             return preg_replace('/\s+/', ' ', $value);
         })->extend('nice', function($model, $value, $key){
             return str_replace('awesome', 'nice', $value);
