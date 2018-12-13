@@ -117,7 +117,7 @@ class Post extends Model
 
 #### Defining accessors/mutators extensions
 
-In the previous examples, we use [accessors/mutators provided](#built-in-accessors-mutators) by the package. You may also register accessors/mutators extensions using the **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
+In the previous examples, we use [accessors/mutators provided](#built-in-accessors/mutators) by the package. You may also register accessors/mutators extensions using the **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
 
 ```
 <?php
