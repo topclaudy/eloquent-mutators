@@ -58,7 +58,7 @@ After configuring your model, you may configure accessors and mutators for its a
 
 #### Defining accessors
 
-For the following Post model, we configure accessors to trim whitespace from the beginning and end of the `title` and `content` attributes.
+For the following Post model, we configure accessors to trim whitespace from the beginning and end of the `title` and `content` attributes:
 
 ```php
 namespace App;
@@ -70,13 +70,84 @@ class Post extends Model
     use \Awobaz\Mutator\Mutable;
     
     protected $accessors = [
-        'title' => ['trim_whitespace'],
-        'content' => ['trim_whitespace'],
+        'title'   => 'trim_whitespace',
+        'content' => 'trim_whitespace',
     ];
 }
 ```
 
-## Built-in mutators
+As you can see, we use an array property named `accessors` on the model to configure its **accessors**. Each key of the array represents the name of an attribute, and the value points to one or multiple accessors. To apply multiple accessors, pass an array as value (the accessors will be applied in the order they are specified):
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use \Awobaz\Mutator\Mutable;
+    
+    protected $accessors = [
+        'title'   => ['trim_whitespace', 'capitalize'], 
+        'content' => ['trim_whitespace', 'remove_extra_whitespace'],
+    ];
+}
+```
+
+#### Defining mutators
+
+To define mutators, use an array property named `mutators` instead.
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use \Awobaz\Mutator\Mutable;
+    
+    protected $mutators = [
+        'title'    => 'remove_extra_whitespace',
+    ];
+}
+```
+
+> **Note:** The name of the properties used for accessors and mutators can be respectively configured in the `config/mutators.php` configuration file.
+
+#### Defining custom accessors and mutators
+
+In the previous examples, we use [accessors/mutators provided](#built-in-accessors-mutators) by the package. You may also register custom accessors/mutators using **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
+
+```
+<?php
+
+namespace App\Providers;
+
+use Awobaz\Mutator\Facades\Mutator;
+use Illuminate\Support\ServiceProvider;
+
+class MutatorServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //Register your custom mutators extensions.
+        //You may also override the default mutators.
+
+        Mutator::extend('mutator_name', function($model, $value, $key){
+            //DO STUFF HERE
+        });
+    }
+}
+```
+As you can see, the model, the attribute's value and the attribute's name are passed to the closure, allowing you to access other attributes of the model and manipulate and return the desired value. 
+
+## Built-in accessors/mutators
 
 - [`lower_case`](#lower_case)
 - [`upper_case`](#upper_case)
