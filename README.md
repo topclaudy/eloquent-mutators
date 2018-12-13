@@ -115,9 +115,9 @@ class Post extends Model
 
 > **Note:** The name of the properties used for accessors and mutators can be respectively configured in the `config/mutators.php` configuration file.
 
-#### Defining custom accessors and mutators
+#### Defining accessors/mutators extensions
 
-In the previous examples, we use [accessors/mutators provided](#built-in-accessors-mutators) by the package. You may also register custom accessors/mutators using **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
+In the previous examples, we use [accessors/mutators provided](#built-in-accessors-mutators) by the package. You may also register accessors/mutators extensions using the **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
 
 ```
 <?php
@@ -136,16 +136,14 @@ class MutatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //Register your custom mutators extensions.
-        //You may also override the default mutators.
-
-        Mutator::extend('mutator_name', function($model, $value, $key){
-            //DO STUFF HERE
+        //Register your custom accessors/mutators extensions here.
+        Mutator::extend('extension_name', function($model, $value, $key){
+            //DO STUFF HERE AND RETURN THE VALUE
         });
     }
 }
 ```
-As you can see, the model, the attribute's value and the attribute's name are passed to the closure, allowing you to access other attributes of the model and manipulate and return the desired value. 
+As you can see, the model ($model), the attribute's value ($value) and the attribute's name ($key) are passed to the closure, allowing you to access other attributes of the model to compute and return the desired value. 
 
 ## Built-in accessors/mutators
 
