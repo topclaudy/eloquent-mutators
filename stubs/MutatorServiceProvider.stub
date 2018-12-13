@@ -14,11 +14,10 @@ class MutatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //Register any custom mutators extensions here.
-        //You may also override the default mutators.
+        //Register your custom accessors/mutators extensions here.
 
-        /*Mutator::extend('mutator_name', function($model, $value, $key){
-            //DO STUFF HERE
+        /*Mutator::extend('extension_name', function($model, $value, $key){
+            //DO STUFF HERE AND RETURN THE VALUE
         });*/
     }
 }
