@@ -32,6 +32,7 @@ Awobaz\Mutator\MutatorServiceProvider::class,
 
 ```php
 'Mutator'   => Awobaz\Mutator\Facades\Mutator::class,
+```
 
 > **Note:** **Eloquent Mutators** requires Laravel 5.4+.
 
