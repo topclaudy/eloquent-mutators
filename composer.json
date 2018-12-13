@@ -1,6 +1,6 @@
 {
     "name": "awobaz/eloquent-mutators",
-    "description": "Reusable mutators (getters/setters) for Laravel 5's Eloquent",
+    "description": "Reusable accessors/mutators (getters/setters) for Laravel 5's Eloquent",
     "license": "MIT",
     "keywords": [
         "laravel",
