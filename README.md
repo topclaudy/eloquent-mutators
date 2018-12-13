@@ -36,7 +36,7 @@ Awobaz\Mutator\MutatorServiceProvider::class,
 
 > **Note:** **Eloquent Mutators** requires Laravel 5.4+.
 
-After installation, publish the assets using the `mutators:install` Artisan command. The primary configuration file will be located at `config/mutators.php`. The installation also publishes and registers the `app/Providers/MutatorServiceProvider.php`. Within this service provider, you may register your custom mutators.
+After installation, publish the assets using the `mutators:install` Artisan command. The primary configuration file will be located at `config/mutators.php`. The installation also publishes and registers the `app/Providers/MutatorServiceProvider.php`. Within this service provider, you may register custom accessors/mutators extensions.
 
 ```sh
 php artisan mutators:install
