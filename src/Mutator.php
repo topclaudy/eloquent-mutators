@@ -2,31 +2,39 @@
 
 namespace Awobaz\Mutator;
 
+use Awobaz\Mutator\Contracts\Factory;
 use Awobaz\Mutator\Exceptions\UnregisteredMutatorException;
 use Closure;
 
-class Mutator
+class Mutator implements Factory
 {
     /**
      * The registered mutators.
      *
      * @var array
      */
-    protected static $registeredMutators = [];
+    private $extensions = [];
 
-    public static function add($name, Closure $getter)
+    /**
+     * Register a custom mutator extension.
+     *
+     * @param  string $mutator
+     * @param  \Closure|string $extension
+     * @return Mutator
+     */
+    public function extend($mutator, Closure $extension)
     {
-        static::$registeredMutators[$name] = $getter;
+        $this->extensions[$mutator] = $extension;
 
-        return new static;
+        return $this;
     }
 
-    public static function get($name)
+    public function get($name)
     {
-        if(!isset(static::$registeredMutators[$name])){
+        if(!isset($this->extensions[$name])){
             throw new UnregisteredMutatorException("The mutator '{$name}' is not registered");
         }
 
-        return static::$registeredMutators[$name];
+        return $this->extensions[$name];
     }
 }

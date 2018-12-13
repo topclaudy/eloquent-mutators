@@ -2,7 +2,7 @@
 
 namespace Awobaz\Mutator\Database\Eloquent\Concerns;
 
-use Awobaz\Mutator\Mutator;
+use Awobaz\Mutator\Facades\Mutator;
 
 trait HasAttributes
 {

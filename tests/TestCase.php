@@ -1,8 +1,9 @@
 <?php
 
+use Awobaz\Mutator\Mutator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Awobaz\Mutator\Mutator;
+use Awobaz\Mutator\Facades\Mutator as MutatorFacade;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -35,15 +36,19 @@ abstract class TestCase extends BaseTestCase
         $this->app['config']->set('mutators.getters_property','getters');
         $this->app['config']->set('mutators.setters_property','setters');
 
-        Mutator::add('trim_space', function($model, $value, $key){
-            return trim($value);
+        $this->app->singleton('mutator', function ($app) {
+            return new Mutator();
         });
 
-        Mutator::add('remove_extra_space', function($model, $value, $key){
+        $this->app->alias('mutator', 'Awobaz\Mutator\Mutator');
+
+        MutatorFacade::extend('trim_space', function($model, $value, $key){
+            return trim($value);
+        })->extend('remove_extra_space', function($model, $value, $key){
             return preg_replace('/\s+/', ' ', $value);
-        })->add('nice', function($model, $value, $key){
+        })->extend('nice', function($model, $value, $key){
             return str_replace('awesome', 'nice', $value);
-        })->add('prepend_star', function($model, $value, $key){
+        })->extend('prepend_star', function($model, $value, $key){
             return '*'.$value;
         });
 

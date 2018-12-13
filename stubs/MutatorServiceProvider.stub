@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Awobaz\Mutator\Mutator;
+use Awobaz\Mutator\Facades\Mutator;
 use Illuminate\Support\ServiceProvider;
 
 class MutatorServiceProvider extends ServiceProvider
@@ -14,12 +14,11 @@ class MutatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Mutator::getter('trim_space', function($model, $value, $key){
-            return trim($value);
-        });
+        //Register any custom mutators extensions here.
+        //You may also override the default mutators.
 
-        Mutator::getter('remove_extra_space', function($model, $value, $key){
-            return preg_replace('/\s+/', ' ', $value);
-        });
+        /*Mutator::extend('mutator_name', function($model, $value, $key){
+            //DO STUFF HERE
+        });*/
     }
 }
