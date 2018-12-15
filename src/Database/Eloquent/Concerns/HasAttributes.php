@@ -99,10 +99,7 @@ trait HasAttributes
      */
     protected function mutateAttribute($key, $value)
     {
-        if(method_exists($this, 'get'.Str::studly($key).'Attribute')) {
-            $value = $this->{'get' . Str::studly($key) . 'Attribute'}($value);
-        }
-
+        $value = parent::mutateAttribute($key, $value);
         return $this->applyAccessors($key, $value);
     }
 }
