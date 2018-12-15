@@ -31,7 +31,7 @@ class Mutator implements Factory
 
     public function get($name)
     {
-        if(!isset($this->extensions[$name])){
+        if (! isset($this->extensions[$name])) {
             throw new UnregisteredMutatorException("The mutator '{$name}' is not registered");
         }
 

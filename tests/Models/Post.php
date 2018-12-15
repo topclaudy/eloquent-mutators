@@ -11,6 +11,6 @@ class Post extends Model
     ];
 
     protected $mutators = [
-        'title' => ['prepend_star']
+        'title' => ['prepend_star'],
     ];
 }

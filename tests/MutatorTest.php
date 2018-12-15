@@ -3,7 +3,7 @@
 use Awobaz\Mutator\Database\Eloquent\Model;
 use Awobaz\Mutator\Tests\Model\Post;
 
-require_once __DIR__. '/TestCase.php';
+require_once __DIR__.'/TestCase.php';
 
 class MutatorTest extends TestCase
 {

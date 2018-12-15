@@ -5,8 +5,8 @@ use Awobaz\Mutator\Console\PublishCommand;
 use Awobaz\Mutator\Facades\Mutator as MutatorFacade;
 use Illuminate\Support\ServiceProvider;
 
-class MutatorServiceProvider extends ServiceProvider {
-
+class MutatorServiceProvider extends ServiceProvider
+{
     /**
      * Bootstrap any package services.
      *
@@ -16,7 +16,6 @@ class MutatorServiceProvider extends ServiceProvider {
     {
         $this->registerPublishing();
     }
-
 
     /**
      * Register the package's publishable resources.
@@ -79,42 +78,41 @@ class MutatorServiceProvider extends ServiceProvider {
         ]);
     }
 
-    private function mergeConfig()
+    private function registerDefaultExtensions()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/mutators.php', 'mutators'
-        );
-    }
-
-    private function registerDefaultExtensions(){
         $extensions = [
             //PHP functions
-            'strtolower'   => 'lower_case',
-            'strtoupper'   => 'upper_case',
-            'ucfirst'      => 'capitalize',
-            'ucwords'      => 'capitalize_all',
-            'trim'         => 'trim_whitespace',
+            'strtolower' => 'lower_case',
+            'strtoupper' => 'upper_case',
+            'ucfirst' => 'capitalize',
+            'ucwords' => 'capitalize_all',
+            'trim' => 'trim_whitespace',
             //Framework functions
-            'camel_case'   => 'camel_case',
-            'snake_case'   => 'snake_case',
-            'kebab_case'   => 'kebab_case',
-            'studly_case'  => 'studly_case',
-            'title_case'   => 'title_case',
-            'str_plural'   => 'plural',
+            'camel_case' => 'camel_case',
+            'snake_case' => 'snake_case',
+            'kebab_case' => 'kebab_case',
+            'studly_case' => 'studly_case',
+            'title_case' => 'title_case',
+            'str_plural' => 'plural',
             'str_singular' => 'singular',
-            'str_slug'     => 'slug',
+            'str_slug' => 'slug',
         ];
 
-        foreach($extensions as $function => $extension){
-            if(function_exists($function)) {
+        foreach ($extensions as $function => $extension) {
+            if (function_exists($function)) {
                 MutatorFacade::extend($extension, function ($model, $value, $key) use ($function) {
                     return $function($value);
                 });
             }
         }
 
-        MutatorFacade::extend('remove_extra_whitespace', function($model, $value, $key){
+        MutatorFacade::extend('remove_extra_whitespace', function ($model, $value, $key) {
             return preg_replace('/\s+/', ' ', $value);
         });
+    }
+
+    private function mergeConfig()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/mutators.php', 'mutators');
     }
 }

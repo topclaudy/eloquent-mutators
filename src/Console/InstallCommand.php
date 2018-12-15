@@ -2,9 +2,9 @@
 
 namespace Awobaz\Mutator\Console;
 
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Console\DetectsApplicationNamespace;
+use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
@@ -57,16 +57,8 @@ class InstallCommand extends Command
             return;
         }
 
-        file_put_contents(config_path('app.php'), str_replace(
-            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL,
-            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL."        {$namespace}\Providers\MutatorServiceProvider::class,".PHP_EOL,
-            $appConfig
-        ));
+        file_put_contents(config_path('app.php'), str_replace("{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL, "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL."        {$namespace}\Providers\MutatorServiceProvider::class,".PHP_EOL, $appConfig));
 
-        file_put_contents(app_path('Providers/MutatorServiceProvider.php'), str_replace(
-            "namespace App\Providers;",
-            "namespace {$namespace}\Providers;",
-            file_get_contents(app_path('Providers/MutatorServiceProvider.php'))
-        ));
+        file_put_contents(app_path('Providers/MutatorServiceProvider.php'), str_replace("namespace App\Providers;", "namespace {$namespace}\Providers;", file_get_contents(app_path('Providers/MutatorServiceProvider.php'))));
     }
 }
