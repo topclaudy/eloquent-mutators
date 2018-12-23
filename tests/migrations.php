@@ -16,6 +16,7 @@ class Migration extends BaseMigration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->text('title');
+            $table->text('slug');
             $table->text('content')->nullable();
             $table->timestamps();
         });

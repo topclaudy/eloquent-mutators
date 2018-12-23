@@ -2,6 +2,7 @@
 
 use Awobaz\Mutator\Facades\Mutator as MutatorFacade;
 use Awobaz\Mutator\Mutator;
+use Awobaz\Mutator\MutatorServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -30,6 +31,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->app->register(MutatorServiceProvider::class);
+
         $this->app['config']->set('database.default', 'sqlite');
         $this->app['config']->set('database.connections.sqlite.database', ':memory:');
 
@@ -50,6 +53,11 @@ abstract class TestCase extends BaseTestCase
             return str_replace('awesome', 'nice', $value);
         })->extend('prepend_star', function ($model, $value, $key) {
             return '*'.$value;
+        })->extend('copy_to', function ($model, $value, $key, $to) {
+            $model->{$to} = $value;
+            return $value;
+        })->extend('replace_words', function ($model, $value, $key, $replace, ...$search) {
+            return str_replace($search, $replace, $value);
         });
 
         $this->migrate();
