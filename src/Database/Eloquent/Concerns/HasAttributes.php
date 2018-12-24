@@ -3,6 +3,7 @@
 namespace Awobaz\Mutator\Database\Eloquent\Concerns;
 
 use Awobaz\Mutator\Facades\Mutator;
+use Illuminate\Support\Arr;
 
 trait HasAttributes
 {
@@ -42,14 +43,9 @@ trait HasAttributes
     protected function applyAccessors($key, $value)
     {
         // If the attribute has custom accessors, we will call them
-        if (property_exists($this, config('mutators.accessors_property')) && isset($this->{config('mutators.accessors_property')}[$key])) {
-            $accessors = array_wrap($this->{config('mutators.accessors_property')}[$key]);
-
-            foreach ($accessors as $accessor) {
-                $value = Mutator::get($accessor)($this, $value, $key);
-            }
+        foreach ($this->getMutatorsFor($key, config('mutators.accessors_property')) as $accessor => $params) {
+            $value = Mutator::get($accessor)($this, $value, $key, ...$params);
         }
-
         return $value;
     }
 
@@ -75,17 +71,9 @@ trait HasAttributes
     protected function applyMutators($key, $value)
     {
         // If the attribute has custom mutators, we will call them
-        if (property_exists($this, config('mutators.mutators_property')) && isset($this->{config('mutators.mutators_property')}[$key])) {
-
-            $mutators = array_wrap($this->{config('mutators.mutators_property')}[$key]);
-
-            foreach ($mutators as $mutator) {
-                $this->attributes[$key] = Mutator::get($mutator)($this, $value, $key);
-            }
-
-            return $this->attributes[$key];
+        foreach ($this->getMutatorsFor($key, config('mutators.mutators_property')) as $mutator => $params) {
+            $value = Mutator::get($mutator)($this, $value, $key, ...$params);
         }
-
         return $value;
     }
 
@@ -101,5 +89,44 @@ trait HasAttributes
         $value = parent::mutateAttribute($key, $value);
 
         return $this->applyAccessors($key, $value);
+    }
+
+    /**
+     * Get the mutators for a given attribute.
+     *
+     * @param string $key The name of the attribute we want to mutate
+     * @param string $type The type of mutation: accessor or mutator
+     * @return array
+     */
+    protected function getMutatorsFor($key, $type)
+    {
+        $mutators = $this->{$type};
+        if (empty($mutators) || ! is_array($mutators) || ! isset($mutators[$key])) {
+            return [];
+        }
+
+        $result = [];
+        foreach ((array) $mutators[$key] as $mutator => $params) {
+            $parsed = $this->parseMutatorNameAndParams($mutator, $params);
+            $result[$parsed[0]] = $parsed[1];
+        }
+        return $result;
+    }
+
+    /**
+     * Separates the mutator name from its optional parameters.
+     *
+     * @param int|string $mutator
+     * @param string|array|mixed $params
+     * @return array
+     */
+    protected function parseMutatorNameAndParams($mutator, $params)
+    {
+        if (is_int($mutator) && is_string($params)) {
+            $params = explode(':', $params);
+            $mutator = $params[0];
+            return [$mutator, count($params) > 1 ? str_getcsv($params[1]) : []];
+        }
+        return [$mutator, Arr::wrap($params)];
     }
 }

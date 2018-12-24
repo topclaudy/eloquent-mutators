@@ -8,9 +8,14 @@ class Post extends Model
 {
     protected $accessors = [
         'title' => ['trim_whitespace', 'remove_extra_whitespace', 'nice'],
+        'content' => [
+            'replace_words' => ['two', 'one'],
+        ],
     ];
 
     protected $mutators = [
-        'title' => ['prepend_star'],
+        'title' => ['prepend_star', 'copy_to' => 'slug'],
+        'slug' => 'slug',
+        'content' => 'replace_words:five,three,four',
     ];
 }
