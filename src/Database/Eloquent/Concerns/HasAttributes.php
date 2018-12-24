@@ -89,7 +89,7 @@ trait HasAttributes
      */
     protected function mutateAttribute($key, $value)
     {
-        if (array_key_exists($key, $this->{config('mutators.accessors_property')}) && method_exists($this, 'get'.Str::studly($key).'Attribute')) {
+        if (array_key_exists($key, $this->{config('mutators.accessors_property')} ?: []) && method_exists($this, 'get'.Str::studly($key).'Attribute')) {
             $value = parent::mutateAttribute($key, $value);
         }
 
