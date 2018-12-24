@@ -65,14 +65,14 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * run package database migrations
+     * run package database migrations.
      *
      * @return void
      */
     public function migrate()
     {
-        $fileSystem = new Filesystem;
-        $fileSystem->requireOnce(__DIR__."/migrations.php");
+        $fileSystem = new Filesystem();
+        $fileSystem->requireOnce(__DIR__.'/migrations.php');
 
         (new Migration())->up();
     }

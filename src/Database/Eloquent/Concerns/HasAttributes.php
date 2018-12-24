@@ -11,7 +11,8 @@ trait HasAttributes
     /**
      * Extract and cache all the mutated attributes of a class.
      *
-     * @param  string $class
+     * @param string $class
+     *
      * @return void
      */
     public static function cacheMutatedAttributes($class)
@@ -19,14 +20,15 @@ trait HasAttributes
         parent::cacheMutatedAttributes($class);
 
         if (property_exists($class, config('mutators.accessors_property'))) {
-            static::$mutatorCache[$class] = array_merge(static::$mutatorCache[$class], array_keys(with(new $class)->{config('mutators.accessors_property')}));
+            static::$mutatorCache[$class] = array_merge(static::$mutatorCache[$class], array_keys(with(new $class())->{config('mutators.accessors_property')}));
         }
     }
 
     /**
      * Get a plain attribute (not a relationship).
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function getAttributeValue($key)
@@ -39,6 +41,7 @@ trait HasAttributes
     /**
      * @param $key
      * @param $value
+     *
      * @return mixed
      */
     protected function applyAccessors($key, $value)
@@ -54,8 +57,9 @@ trait HasAttributes
     /**
      * Set a given attribute on the model.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
+     *
      * @return mixed
      */
     public function setAttribute($key, $value)
@@ -68,6 +72,7 @@ trait HasAttributes
     /**
      * @param $key
      * @param $value
+     *
      * @return
      */
     protected function applyMutators($key, $value)
@@ -83,8 +88,9 @@ trait HasAttributes
     /**
      * Get the value of an attribute using its mutator.
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param string $key
+     * @param mixed $value
+     *
      * @return mixed
      */
     protected function mutateAttribute($key, $value)
@@ -103,6 +109,7 @@ trait HasAttributes
      *
      * @param string $key The name of the attribute we want to mutate
      * @param string $type The type of mutation: accessor or mutator
+     *
      * @return array
      */
     protected function getMutatorsFor($key, $type)
@@ -126,6 +133,7 @@ trait HasAttributes
      *
      * @param int|string $mutator
      * @param string|array|mixed $params
+     *
      * @return array
      */
     protected function parseMutatorNameAndParams($mutator, $params)

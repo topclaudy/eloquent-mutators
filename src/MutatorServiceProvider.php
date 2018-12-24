@@ -1,4 +1,6 @@
-<?php namespace Awobaz\Mutator;
+<?php
+
+namespace Awobaz\Mutator;
 
 use Awobaz\Mutator\Console\InstallCommand;
 use Awobaz\Mutator\Console\PublishCommand;

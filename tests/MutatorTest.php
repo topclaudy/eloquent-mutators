@@ -9,7 +9,7 @@ require_once __DIR__.'/Models/Post.php';
 class MutatorTest extends TestCase
 {
     /**
-     * Test the save method on a relationship
+     * Test the save method on a relationship.
      *
      * @return void
      */
