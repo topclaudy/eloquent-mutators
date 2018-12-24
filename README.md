@@ -115,7 +115,7 @@ class Post extends Model
 
 > **Note:** The name of the properties used for accessors and mutators can be respectively configured in the `config/mutators.php` configuration file.
 
-#### Defining accessors/mutators extensions
+### Defining accessors/mutators extensions
 
 In the previous examples, we use [accessors/mutators provided](#built-in-accessorsmutators) by the package. You may also register accessors/mutators extensions using the **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
 
@@ -145,7 +145,7 @@ class MutatorServiceProvider extends ServiceProvider
 ```
 As you can see, the model ($model), the attribute's value ($value) and the attribute's name ($key) are passed to the closure, allowing you to access other attributes of the model to compute and return the desired value. 
 
-##### Additional parameters
+#### Additional parameters
 You can also define additionnal parameters for an extension. This give us the flexibility to implement dynamic accessors/mutators.
 
 ```
