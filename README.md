@@ -212,7 +212,7 @@ This will replace every occurence of ***one*** with ***two*** for the `content` 
 - [`singular`](#singular)
 - [`slug`](#slug)
 - [`remove_extra_whitespace`](#remove_extra_whitespace)
-- [`preg_replace:pattern,replacement[,limit]`](#preg_replace:pattern,replacement[,limit])
+- [`preg_replace:pattern,replacement[,limit]`](#preg_replacepatternreplacementlimit)
 
 ### `lower_case`
 Convert the attribute to lower case.
