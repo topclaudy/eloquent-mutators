@@ -4,6 +4,7 @@ namespace Awobaz\Mutator\Database\Eloquent\Concerns;
 
 use Awobaz\Mutator\Facades\Mutator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 trait HasAttributes
 {
@@ -88,7 +89,9 @@ trait HasAttributes
      */
     protected function mutateAttribute($key, $value)
     {
-        $value = parent::mutateAttribute($key, $value);
+        if (array_key_exists($key, $this->{config('mutators.accessors_property')}) && method_exists($this, 'get'.Str::studly($key).'Attribute')) {
+            $value = parent::mutateAttribute($key, $value);
+        }
 
         return $this->applyAccessors($key, $value);
     }
