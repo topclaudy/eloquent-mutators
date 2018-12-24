@@ -46,6 +46,7 @@ trait HasAttributes
         foreach ($this->getMutatorsFor($key, config('mutators.accessors_property')) as $accessor => $params) {
             $value = Mutator::get($accessor)($this, $value, $key, ...$params);
         }
+
         return $value;
     }
 
@@ -74,6 +75,7 @@ trait HasAttributes
         foreach ($this->getMutatorsFor($key, config('mutators.mutators_property')) as $mutator => $params) {
             $value = Mutator::get($mutator)($this, $value, $key, ...$params);
         }
+
         return $value;
     }
 
@@ -110,6 +112,7 @@ trait HasAttributes
             $parsed = $this->parseMutatorNameAndParams($mutator, $params);
             $result[$parsed[0]] = $parsed[1];
         }
+
         return $result;
     }
 
@@ -125,8 +128,10 @@ trait HasAttributes
         if (is_int($mutator) && is_string($params)) {
             $params = explode(':', $params);
             $mutator = $params[0];
+
             return [$mutator, count($params) > 1 ? str_getcsv($params[1]) : []];
         }
+
         return [$mutator, Arr::wrap($params)];
     }
 }

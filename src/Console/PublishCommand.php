@@ -28,7 +28,7 @@ class PublishCommand extends Command
     public function handle()
     {
         $this->call('vendor:publish', [
-            '--tag' => 'mutators-config',
+            '--tag'   => 'mutators-config',
             '--force' => $this->option('force'),
         ]);
     }

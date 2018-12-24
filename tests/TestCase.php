@@ -55,6 +55,7 @@ abstract class TestCase extends BaseTestCase
             return '*'.$value;
         })->extend('copy_to', function ($model, $value, $key, $to) {
             $model->{$to} = $value;
+
             return $value;
         })->extend('replace_words', function ($model, $value, $key, $replace, ...$search) {
             return str_replace($search, $replace, $value);
