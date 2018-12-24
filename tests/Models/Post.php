@@ -16,6 +16,6 @@ class Post extends Model
     protected $mutators = [
         'title'   => ['prepend_star', 'copy_to' => 'slug'],
         'slug'    => 'slug',
-        'content' => 'replace_words:five,three,four',
+        'content' => ['replace_words:five,three,four', 'preg_replace' => ['/Batman/', 'Bruce Wayne']],
     ];
 }

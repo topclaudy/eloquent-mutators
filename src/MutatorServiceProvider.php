@@ -109,6 +109,10 @@ class MutatorServiceProvider extends ServiceProvider
         MutatorFacade::extend('remove_extra_whitespace', function ($model, $value, $key) {
             return preg_replace('/\s+/', ' ', $value);
         });
+
+        MutatorFacade::extend('preg_replace', function ($model, $value, $key, $pattern, $replacement, $limit = -1) {
+            return preg_replace($pattern, $replacement, $value, $limit);
+        });
     }
 
     private function mergeConfig()
