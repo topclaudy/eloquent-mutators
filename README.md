@@ -259,10 +259,6 @@ Remove extra whitespaces within the attribute.
 ### `preg_replace:pattern,replacement[,limit]`
 Perform a regular expression search and replace on the attribute.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/topclaudy/eloquent-mutators/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/topclaudy/eloquent-mutators/tags).
@@ -284,7 +280,20 @@ $ vendor/bin/phpunit
 ## Authors
 
 * [Claudin J. Daniel](https://github.com/topclaudy) - *Initial work*
-* [william](https://github.com/wfeller)
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/topclaudy/eloquent-mutators/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/0)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/0)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/1)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/1)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/2)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/2)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/3)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/3)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/4)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/4)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/5)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/5)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/6)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/6)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/7)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/7)
+
 
 ## Sponsored by
 
