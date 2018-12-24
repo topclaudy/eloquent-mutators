@@ -284,6 +284,7 @@ $ vendor/bin/phpunit
 ## Authors
 
 * [Claudin J. Daniel](https://github.com/topclaudy) - *Initial work*
+* [william](https://github.com/wfeller)
 
 ## Sponsored by
 
