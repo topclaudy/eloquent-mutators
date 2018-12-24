@@ -165,7 +165,7 @@ class MutatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //The following extensions is an implementation for str_replace
+        //The following extension is an implementation for str_replace
         Mutator::extend('str_replace', function ($model, $value, $key, $search, $replace) {
             return str_replace($search, $replace, $value);
         });
