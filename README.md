@@ -145,6 +145,57 @@ class MutatorServiceProvider extends ServiceProvider
 ```
 As you can see, the model ($model), the attribute's value ($value) and the attribute's name ($key) are passed to the closure, allowing you to access other attributes of the model to compute and return the desired value. 
 
+##### Additional parameters
+You can also define additionnal parameters for an extension. This give us the flexibility to implement dynamic accessors/mutators.
+
+```
+<?php
+
+namespace App\Providers;
+
+use Awobaz\Mutator\Facades\Mutator;
+use Illuminate\Support\ServiceProvider;
+
+class MutatorServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //The following extensions is an implementation for str_replace
+        Mutator::extend('str_replace', function ($model, $value, $key, $search, $replace) {
+            return str_replace($search, $replace, $value);
+        });
+    }
+}
+```
+
+In the above example, the model ($model), the attribute's value ($value), the attribute's name ($key) and two additional parameters are passed to the closure.
+
+To apply this extension, we can use the following syntaxes:
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use \Awobaz\Mutator\Mutable;
+    
+    protected $accessors = [
+        'content' => ['str_replace' => ['one', 'two']]
+        //OR 
+        //'content' => 'str_replace:one,two'
+    ];
+}
+```
+
+This will replace every occurence of ***one*** with ***two*** for the `content` attribute.
+
 ## Built-in accessors/mutators
 
 - [`lower_case`](#lower_case)
@@ -161,6 +212,7 @@ As you can see, the model ($model), the attribute's value ($value) and the attri
 - [`singular`](#singular)
 - [`slug`](#slug)
 - [`remove_extra_whitespace`](#remove_extra_whitespace)
+- - [`preg_replace`](#preg_replace)
 
 ### `lower_case`
 Convert the attribute to lower case.
@@ -203,6 +255,9 @@ Convert the attribute to its URL friendly "slug" form.
 
 ### `remove_extra_whitespace`
 Remove extra whitespaces within the attribute.
+
+### `preg_replace:pattern,replacement[,limit]`
+Perform a regular expression search and replace on the attribute.
 
 ## Contributing
 
