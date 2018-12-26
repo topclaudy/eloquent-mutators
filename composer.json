@@ -42,6 +42,7 @@
   },
   "suggest": {
     "awobaz/compoships": "Multi-columns relationships for Laravel 5's Eloquent",
+    "awobaz/auto-append": "Automatically append accessors to model serialization",
     "awobaz/blade-active": "Blade directives for the Laravel 'Active' package",
     "awobaz/syntactic": "Syntactic sugar for named and indexed parameters call."
   }
