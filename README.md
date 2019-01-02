@@ -146,7 +146,7 @@ class MutatorServiceProvider extends ServiceProvider
 As you can see, the model ($model), the attribute's value ($value) and the attribute's name ($key) are passed to the closure, allowing you to access other attributes of the model to compute and return the desired value. 
 
 #### Additional parameters
-You can also define additionnal parameters for an extension. This give us the flexibility to implement dynamic accessors/mutators.
+You can also define additional parameters for an extension. This give us the flexibility to implement dynamic accessors/mutators.
 
 ```
 <?php
