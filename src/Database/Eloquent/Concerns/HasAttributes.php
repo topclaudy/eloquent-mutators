@@ -140,9 +140,9 @@ trait HasAttributes
     {
         if (is_int($mutator) && is_string($params)) {
             $params = explode(':', $params);
-            $mutator = $params[0];
+            $mutator = array_shift($params);
 
-            return [$mutator, count($params) > 1 ? str_getcsv($params[1]) : []];
+            return [$mutator, count($params) > 1 ? str_getcsv(implode(':', $params)) : []];
         }
 
         return [$mutator, Arr::wrap($params)];

@@ -42,6 +42,11 @@ class MutatorTest extends TestCase
         $this->assertEquals('five five', $post->content);
         $this->assertEquals('five five', $raw['content']);
 
+        $post->content = 'one:two';
+        $raw = $post->getAttributes();
+        $this->assertEquals('five', $post->content);
+        $this->assertEquals('five', $raw['content']);
+
         $post->content = 'I saw Batman';
         $raw = $post->getAttributes();
         $this->assertEquals('I saw Bruce Wayne', $post->content);
