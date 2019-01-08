@@ -115,7 +115,7 @@ class Post extends Model
 
 > **Note:** The name of the properties used for accessors and mutators can be respectively configured in the `config/mutators.php` configuration file.
 
-#### Defining accessors/mutators extensions
+### Defining accessors/mutators extensions
 
 In the previous examples, we use [accessors/mutators provided](#built-in-accessorsmutators) by the package. You may also register accessors/mutators extensions using the **extend** method of the `Mutator` facade. The **extend** method accepts the name of the accessor/mutator and a closure.
 
@@ -145,6 +145,57 @@ class MutatorServiceProvider extends ServiceProvider
 ```
 As you can see, the model ($model), the attribute's value ($value) and the attribute's name ($key) are passed to the closure, allowing you to access other attributes of the model to compute and return the desired value. 
 
+#### Additional parameters
+You can also define additional parameters for an extension. This give us the flexibility to implement dynamic accessors/mutators.
+
+```
+<?php
+
+namespace App\Providers;
+
+use Awobaz\Mutator\Facades\Mutator;
+use Illuminate\Support\ServiceProvider;
+
+class MutatorServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //The following extension is an implementation for str_replace
+        Mutator::extend('str_replace', function ($model, $value, $key, $search, $replace) {
+            return str_replace($search, $replace, $value);
+        });
+    }
+}
+```
+
+In the above example, the model ($model), the attribute's value ($value), the attribute's name ($key) and two additional parameters are passed to the closure.
+
+To apply this extension, we can use the following syntaxes:
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use \Awobaz\Mutator\Mutable;
+    
+    protected $accessors = [
+        'content' => ['str_replace' => ['one', 'two']]
+        //OR 
+        //'content' => 'str_replace:one,two'
+    ];
+}
+```
+
+This will replace every occurence of ***one*** with ***two*** for the `content` attribute.
+
 ## Built-in accessors/mutators
 
 - [`lower_case`](#lower_case)
@@ -161,6 +212,7 @@ As you can see, the model ($model), the attribute's value ($value) and the attri
 - [`singular`](#singular)
 - [`slug`](#slug)
 - [`remove_extra_whitespace`](#remove_extra_whitespace)
+- [`preg_replace:pattern,replacement[,limit]`](#preg_replacepatternreplacementlimit)
 
 ### `lower_case`
 Convert the attribute to lower case.
@@ -204,9 +256,8 @@ Convert the attribute to its URL friendly "slug" form.
 ### `remove_extra_whitespace`
 Remove extra whitespaces within the attribute.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/topclaudy/eloquent-mutators/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+### `preg_replace:pattern,replacement[,limit]`
+Perform a regular expression search and replace on the attribute.
 
 ## Versioning
 
@@ -229,6 +280,20 @@ $ vendor/bin/phpunit
 ## Authors
 
 * [Claudin J. Daniel](https://github.com/topclaudy) - *Initial work*
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/topclaudy/eloquent-mutators/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/0)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/0)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/1)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/1)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/2)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/2)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/3)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/3)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/4)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/4)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/5)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/5)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/6)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/6)
+[![](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/images/7)](https://sourcerer.io/fame/topclaudy/topclaudy/eloquent-mutators/links/7)
+
 
 ## Sponsored by
 

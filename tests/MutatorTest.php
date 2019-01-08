@@ -9,7 +9,7 @@ require_once __DIR__.'/Models/Post.php';
 class MutatorTest extends TestCase
 {
     /**
-     * Test the save method on a relationship
+     * Test the save method on a relationship.
      *
      * @return void
      */
@@ -46,6 +46,11 @@ class MutatorTest extends TestCase
         $raw = $post->getAttributes();
         $this->assertEquals('five', $post->content);
         $this->assertEquals('five', $raw['content']);
+
+        $post->content = 'I saw Batman';
+        $raw = $post->getAttributes();
+        $this->assertEquals('I saw Bruce Wayne', $post->content);
+        $this->assertEquals('I saw Bruce Wayne', $raw['content']);
 
         Model::unguard();
     }

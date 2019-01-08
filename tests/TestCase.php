@@ -55,6 +55,7 @@ abstract class TestCase extends BaseTestCase
             return '*'.$value;
         })->extend('copy_to', function ($model, $value, $key, $to) {
             $model->{$to} = $value;
+
             return $value;
         })->extend('replace_words', function ($model, $value, $key, $replace, ...$search) {
             return str_replace($search, $replace, $value);
@@ -64,14 +65,14 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * run package database migrations
+     * run package database migrations.
      *
      * @return void
      */
     public function migrate()
     {
-        $fileSystem = new Filesystem;
-        $fileSystem->requireOnce(__DIR__."/migrations.php");
+        $fileSystem = new Filesystem();
+        $fileSystem->requireOnce(__DIR__.'/migrations.php');
 
         (new Migration())->up();
     }

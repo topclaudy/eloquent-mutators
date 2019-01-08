@@ -18,8 +18,9 @@ class Mutator implements Factory
     /**
      * Register a custom mutator extension.
      *
-     * @param  string $mutator
-     * @param  \Closure|string $extension
+     * @param string $mutator
+     * @param \Closure|string $extension
+     *
      * @return Mutator
      */
     public function extend($mutator, Closure $extension)

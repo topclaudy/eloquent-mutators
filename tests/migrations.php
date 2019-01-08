@@ -9,7 +9,7 @@ class Migration extends BaseMigration
     /**
      * Run the migrations.
      *
-     * @return  void
+     * @return void
      */
     public function up()
     {
@@ -25,7 +25,7 @@ class Migration extends BaseMigration
     /**
      * Reverse the migrations.
      *
-     * @return  void
+     * @return void
      */
     public function down()
     {

@@ -1,6 +1,8 @@
-<?php namespace Awobaz\Mutator\Facades;
+<?php
 
-/**
+namespace Awobaz\Mutator\Facades;
+
+/*
  * This file is part of Mutator,
  * eloquent getters/setters solution for Laravel 5's Eloquent.
  *

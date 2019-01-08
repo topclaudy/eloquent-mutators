@@ -1,4 +1,6 @@
-<?php namespace Awobaz\Mutator;
+<?php
+
+namespace Awobaz\Mutator;
 
 use Awobaz\Mutator\Console\InstallCommand;
 use Awobaz\Mutator\Console\PublishCommand;
@@ -82,20 +84,20 @@ class MutatorServiceProvider extends ServiceProvider
     {
         $extensions = [
             //PHP functions
-            'strtolower' => 'lower_case',
-            'strtoupper' => 'upper_case',
-            'ucfirst' => 'capitalize',
-            'ucwords' => 'capitalize_all',
-            'trim' => 'trim_whitespace',
+            'strtolower'   => 'lower_case',
+            'strtoupper'   => 'upper_case',
+            'ucfirst'      => 'capitalize',
+            'ucwords'      => 'capitalize_all',
+            'trim'         => 'trim_whitespace',
             //Framework functions
-            'camel_case' => 'camel_case',
-            'snake_case' => 'snake_case',
-            'kebab_case' => 'kebab_case',
-            'studly_case' => 'studly_case',
-            'title_case' => 'title_case',
-            'str_plural' => 'plural',
+            'camel_case'   => 'camel_case',
+            'snake_case'   => 'snake_case',
+            'kebab_case'   => 'kebab_case',
+            'studly_case'  => 'studly_case',
+            'title_case'   => 'title_case',
+            'str_plural'   => 'plural',
             'str_singular' => 'singular',
-            'str_slug' => 'slug',
+            'str_slug'     => 'slug',
         ];
 
         foreach ($extensions as $function => $extension) {
@@ -108,6 +110,10 @@ class MutatorServiceProvider extends ServiceProvider
 
         MutatorFacade::extend('remove_extra_whitespace', function ($model, $value, $key) {
             return preg_replace('/\s+/', ' ', $value);
+        });
+
+        MutatorFacade::extend('preg_replace', function ($model, $value, $key, $pattern, $replacement, $limit = -1) {
+            return preg_replace($pattern, $replacement, $value, $limit);
         });
     }
 
