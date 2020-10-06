@@ -87,7 +87,7 @@ class MutatorServiceProvider extends ServiceProvider
             'strtolower'   => 'lower_case',
             'strtoupper'   => 'upper_case',
             'ucfirst'      => 'capitalize',
-            'ucwords'      => 'capitalize_all',
+            'ucwords'      => 'capitalize_words',
             'trim'         => 'trim_whitespace',
             //Framework functions
             'camel_case'   => 'camel_case',
