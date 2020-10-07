@@ -84,8 +84,8 @@ class MutatorServiceProvider extends ServiceProvider
     {
         $extensions = [
             //PHP functions
-            'strtolower'   => 'lower_case',
-            'strtoupper'   => 'upper_case',
+            'mb_strtolower'   => 'lower_case',
+            'mb_strtoupper'   => 'upper_case',
             'ucfirst'      => 'capitalize',
             'ucwords'      => 'capitalize_words',
             'trim'         => 'trim_whitespace',
