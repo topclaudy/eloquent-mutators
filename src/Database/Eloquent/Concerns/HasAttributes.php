@@ -5,6 +5,7 @@ namespace Awobaz\Mutator\Database\Eloquent\Concerns;
 use Awobaz\Mutator\Facades\Mutator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use ReflectionClass;
 
 trait HasAttributes
 {
@@ -15,9 +16,13 @@ trait HasAttributes
      *
      * @return void
      */
-    public static function cacheMutatedAttributes($class)
+    public static function cacheMutatedAttributes($classOrInstance)
     {
-        parent::cacheMutatedAttributes($class);
+        parent::cacheMutatedAttributes($classOrInstance);
+
+        $reflection = new ReflectionClass($classOrInstance);
+
+        $class = $reflection->getName();
 
         if (property_exists($class, config('mutators.accessors_property'))) {
             static::$mutatorCache[$class] = array_merge(static::$mutatorCache[$class], array_keys(with(new $class())->{config('mutators.accessors_property')}));
