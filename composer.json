@@ -1,50 +1,49 @@
 {
-  "name": "awobaz/eloquent-mutators",
-  "description": "Reusable accessors/mutators (getters/setters) for Laravel 5's Eloquent",
-  "license": "MIT",
-  "keywords": [
-    "laravel",
-    "laravel mutators",
-    "laravel accessors",
-    "laravel getters setters"
-  ],
-  "authors": [
-    {
-      "name": "Claudin J. Daniel",
-      "email": "cdaniel@awobaz.com"
-    }
-  ],
-  "require": {
-    "php": "^7.1|^8.0",
-    "illuminate/database": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
-    "illuminate/console": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
-    "illuminate/support": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
-    "illuminate/cache": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
-    "laravel/helpers": "^1.5"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
-    "laravel/laravel": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
-    "fakerphp/faker": "^1.8"
-  },
-  "autoload": {
-    "psr-4": {
-      "Awobaz\\Mutator\\": "src"
+    "name": "awobaz/eloquent-mutators",
+    "description": "Reusable accessors/mutators (getters/setters) for Laravel 5's Eloquent",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "laravel mutators",
+        "laravel accessors",
+        "laravel getters setters"
+    ],
+    "authors": [
+        {
+            "name": "Claudin J. Daniel",
+            "email": "cdaniel@awobaz.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1|^8.0",
+        "illuminate/database": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0|^12.0",
+        "illuminate/console": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0|^12.0",
+        "illuminate/support": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0|^12.0",
+        "illuminate/cache": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0|^12.0",
+        "laravel/helpers": "^1.5"
     },
-    "files": [
-    ]
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Awobaz\\Mutator\\MutatorServiceProvider"
-      ]
+    "require-dev": {
+        "phpunit/phpunit": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
+        "laravel/laravel": "~5.4|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0",
+        "fakerphp/faker": "^1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Awobaz\\Mutator\\": "src"
+        },
+        "files": []
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Awobaz\\Mutator\\MutatorServiceProvider"
+            ]
+        }
+    },
+    "suggest": {
+        "awobaz/compoships": "Multi-columns relationships for Laravel 5's Eloquent",
+        "awobaz/eloquent-auto-append": "Automatically append accessors to model serialization",
+        "awobaz/blade-active": "Blade directives for the Laravel 'Active' package",
+        "awobaz/syntactic": "Syntactic sugar for named and indexed parameters call."
     }
-  },
-  "suggest": {
-    "awobaz/compoships": "Multi-columns relationships for Laravel 5's Eloquent",
-    "awobaz/eloquent-auto-append": "Automatically append accessors to model serialization",
-    "awobaz/blade-active": "Blade directives for the Laravel 'Active' package",
-    "awobaz/syntactic": "Syntactic sugar for named and indexed parameters call."
-  }
 }
